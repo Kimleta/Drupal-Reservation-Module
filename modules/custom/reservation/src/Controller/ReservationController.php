@@ -2,14 +2,22 @@
 
 namespace Drupal\reservation\Controller;
 
+use Drupal;
 use Drupal\Core\Controller\ControllerBase;
+use \Drupal\node\Entity\Node;
 
-class ReservationController extends ControllerBase {
+class ReservationController{
 
   public function content() {
+
+     $movies = \Drupal::entityTypeManager()
+     ->getStorage('node')
+     ->loadByProperties(['type' => 'movie']);
+
     return array(
-      '#type' => 'markup',
-      '#markup' => t('Welcome to reservation page'),
-    );
+       '#theme' => 'reservation',
+       '#movies' => $movies,
+       '#title' => 'Welcome to movie reservation page',
+     );
   }
 }

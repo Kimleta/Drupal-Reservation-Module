@@ -1,0 +1,13 @@
+<h1> List of movies </h1>
+
+  <ol>
+    {% for movie in movies %}
+        <li>
+            <div>
+               <h5 style = "text-weight:bold"> {{movie.title.value | raw}}  </h5>
+                <img src="{{ file_url(movie.field_movie_image.entity.fileuri) }}" width="300" height="300" />
+                {{movie.field_description.value | raw}}
+            </div>
+        </li>
+    {% endfor %}
+</ol> 
