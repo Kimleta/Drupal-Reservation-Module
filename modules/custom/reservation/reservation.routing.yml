@@ -5,4 +5,4 @@ reservation.content:
     _title: 'Movie reservation'
   requirements:
     _permission: 'access content'
-    
+  methods: [GET]
