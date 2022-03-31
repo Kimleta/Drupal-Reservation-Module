@@ -1,0 +1,22 @@
+uuid: bd9cc61c-fa37-474f-8f4f-84b030679f6b
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - showcase_lite
+_core:
+  default_config_hash: y2euUMdfoFmV4z8yJj0cTgmJneDVGzyTNd2CrrjS8N8
+id: showcase_lite_content
+theme: showcase_lite
+region: content
+weight: -1
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  label_display: '0'
+  provider: system
+visibility: {  }
