@@ -6,3 +6,4 @@ reservation.content:
   requirements:
     _permission: 'access content'
   methods: [GET]
+  

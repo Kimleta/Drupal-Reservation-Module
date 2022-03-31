@@ -4,4 +4,3 @@ reservation:
     js/reservation.js: {}
   dependencies:
     - core/jquery
-    
