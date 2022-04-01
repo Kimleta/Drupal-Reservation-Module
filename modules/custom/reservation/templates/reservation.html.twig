@@ -1,13 +1,31 @@
-<h1> List of movies </h1>
-
-  <ol>
-    {% for movie in movies %}
-        <li>
-            <div>
-               <h5 style = "text-weight:bold"> {{movie.title.value | raw}}  </h5>
-                <img src="{{ file_url(movie.field_movie_image.entity.fileuri) }}" width="300" height="300" />
-                {{movie.field_description.value | raw}}
-            </div>
-        </li>
-    {% endfor %}
-</ol>
+{{ attach_library('reservation/reservation') }} 
+<head> 
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="../css/reservation.css">
+</head>
+<body>
+    <h1> List of movies </h1>
+        <h3>Please select genre : </h3>
+        <select id="genre" name="genre">
+            <option value = "">Select a genre</option>
+            <option value=0>All movies</option>
+            {% for genre in genres %}
+            <option value = "{{genre.tid.value}}">{{genre.name.value}}</option>
+            {% endfor %}
+        </select>
+    <ol>
+    {% if movies is not empty  %}
+        {% for movie in movies %}
+            <li>
+                <div>
+                <h5 style = "text-weight:bold"> {{movie.title.value | raw}}  </h5>
+                    <img class="center" src="{{ file_url(movie.field_movie_image.entity.fileuri) }}" width="300" height="300" />
+                    {{movie.field_description.value | raw}}
+                </div>
+            </li>
+        {% endfor %}
+    {% else %}
+            <h5>Sorry, we do not have movies with selected genre yet!</h5>
+    {% endif %}
+    </ol>
+</body>
