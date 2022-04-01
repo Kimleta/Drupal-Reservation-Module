@@ -11,4 +11,23 @@ $("#genre").on("change", function() {
     });
 }
 
+function changeOnClick() {
+    $(".item").click(function(){
+
+        $(".item").removeClass("itemChange") // If there is itemChange class, this method will remove it !
+
+        $(this).toggleClass('itemChange') // If there is no itemChange class, this method will add it !
+        $(".button").show();
+    
+    })
+      
+}
+
+function hide() {
+    $(".button").hide();
+    $(".item").removeClass("itemChange");
+}
+
+
 genre();
+changeOnClick();
