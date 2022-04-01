@@ -8,6 +8,7 @@
         <h3>Please select genre : </h3>
         <select id="genre" name="genre">
             <option value = "">Select a genre</option>
+            <option value=0>All movies</option>
             {% for genre in genres %}
             <option value = "{{genre.tid.value}}">{{genre.name.value}}</option>
             {% endfor %}
