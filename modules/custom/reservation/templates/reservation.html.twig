@@ -1,6 +1,7 @@
 {{ attach_library('reservation/reservation') }} 
 <head> 
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="../css/reservation.css">
 </head>
 <body>
     <h1> List of movies </h1>
@@ -17,7 +18,7 @@
             <li>
                 <div>
                 <h5 style = "text-weight:bold"> {{movie.title.value | raw}}  </h5>
-                    <img src="{{ file_url(movie.field_movie_image.entity.fileuri) }}" width="300" height="300" />
+                    <img class="center" src="{{ file_url(movie.field_movie_image.entity.fileuri) }}" width="300" height="300" />
                     {{movie.field_description.value | raw}}
                 </div>
             </li>
