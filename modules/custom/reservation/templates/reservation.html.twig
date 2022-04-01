@@ -19,8 +19,8 @@
             <li>
                 <div>
                 <h5 style = "text-weight:bold"> {{movie.title.value | raw}}  </h5>
-                    <img class="center" src="{{ file_url(movie.field_movie_image.entity.fileuri) }}" width="300" height="300" />
-                    {{movie.field_description.value | raw}}
+                    <img src="{{ file_url(movie.field_movie_image.entity.fileuri) }}" width="300" height="300" />
+                    <p>{{movie.field_description.value | raw}}</p>
                 </div>
             </li>
         {% endfor %}
