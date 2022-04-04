@@ -3,6 +3,13 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 </head>
 <body>
+    <form id="formName"name="formName" onsubmit="return validateForm()">
+        <div>
+            <label>Please enter you name : (required)</label>
+            <input type="text" id="customer_name" name="name"
+             title="Please use only letters" required maxlength="10">      
+        </div>
+    </form>
     <h1> List of movies </h1>
         <h3>Please select genre : </h3>
         <select id="genre" name="genre">

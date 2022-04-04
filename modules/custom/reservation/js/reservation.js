@@ -25,5 +25,17 @@ function SelectingMovieOnClick() {
       
 }
 
+  function validateForm() {
+      let word = document.forms["formName"]["name"].value;
+      var hasNumber = /\d/;
+      
+      if (word[0].toUpperCase() === word[0] && (hasNumber.test(word)!=true)){
+        return word;
+      } else {
+            alert("Please don't write numbers and capitalize first letter of your name !");
+            return false ;
+      }
+     }
+
 genre();
 SelectingMovieOnClick()
