@@ -17,11 +17,10 @@
         {% for movie in movies %}
             <li class="list_item" value="{{movie.nid.value}}"> 
                     <div class="item">
-                        <h5 style = "text-align:center;"> {{movie.title.value | raw}}  </h5>
-                        <img class="center" src="{{ file_url(movie.field_movie_image.entity.fileuri) }}" width="300" height="300" />
-                        <center><button type="button" class="button" style="background-color: blue">Click Me!</button></center> 
-                        <center><button type="button" class="button" style="background-color: red" onclick="hide()">Click Me!</button></center> 
-                        <p>{{movie.field_description.value | raw}}</p>
+                        <h5 id="movie-title-{{movie.nid.value}}" style = "text-align:center;"> {{movie.title.value | raw}}  </h5>
+                        <img id="movie-image-{{movie.nid.value}}" class="center" src="{{ file_url(movie.field_movie_image.entity.fileuri) }}" width="300" height="300" />
+                        <br><center><button type="button" class="button" style="background-color: blue" id="reservation-button-{{movie.nid.value}}">Reserve movie</button></center> 
+                        <p id="movie-desc-{{movie.nid.value}}">{{movie.field_description.value | raw}}</p>
             </div>
             </li>
         {% endfor %}
