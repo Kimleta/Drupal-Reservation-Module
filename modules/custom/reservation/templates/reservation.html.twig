@@ -1,7 +1,6 @@
-{{ attach_library('reservation/reservation') }} 
+{{attach_library('reservation/reservation')}} 
 <head> 
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <link rel="stylesheet" href="../css/reservation.css">
 </head>
 <body>
     <h1> List of movies </h1>
@@ -16,12 +15,13 @@
     <ol>
     {% if movies is not empty  %}
         {% for movie in movies %}
-            <li>
-                <div>
-                <h5 style = "text-weight:bold"> {{movie.title.value | raw}}  </h5>
-                    <img src="{{ file_url(movie.field_movie_image.entity.fileuri) }}" width="300" height="300" />
-                    <p>{{movie.field_description.value | raw}}</p>
-                </div>
+            <li class="list_item" value="{{movie.nid.value}}"> 
+                    <div class="item">
+                        <h5 id="movie-title-{{movie.nid.value}}" style = "text-align:center;"> {{movie.title.value | raw}}  </h5>
+                        <img id="movie-image-{{movie.nid.value}}" class="center" src="{{ file_url(movie.field_movie_image.entity.fileuri) }}" width="300" height="300" />
+                        <br><center><button type="button" class="button" style="background-color: blue" id="reservation-button-{{movie.nid.value}}">Reserve movie</button></center> 
+                        <p id="movie-desc-{{movie.nid.value}}">{{movie.field_description.value | raw}}</p>
+            </div>
             </li>
         {% endfor %}
     {% else %}
