@@ -11,7 +11,7 @@ $("#genre").on("change", function() {
     });
 }
 
-function changeOnClick() {
+function SelectingMovieOnClick() {
     $(".item").click(function(){
         if(!$(this).is('.itemChange')) {
             $(this).toggleClass('itemChange') // If there is no itemChange class, this method will add it !
@@ -25,6 +25,5 @@ function changeOnClick() {
       
 }
 
-
 genre();
-changeOnClick();
+SelectingMovieOnClick()
