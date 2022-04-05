@@ -27,16 +27,13 @@ function SelectingMovieOnClick() {
 
   function validateForm() {
     $("#formName").submit(function(){;
+        
       const word = $('#customer_name').val();
       const hasNumber = /^[A-Z][a-z]+$/;
-      
-      if (hasNumber.test(word)){
-        return true
-      } else {
-         alert("Please don't write numbers and capitalize first letter of your name !");
-         return false ;
-      }
+      return hasNumber.test(word)
+   
      })
+
     }
 
 genre();
