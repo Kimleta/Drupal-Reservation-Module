@@ -27,8 +27,8 @@ function SelectingMovieOnClick() {
 
   function validateForm() {
     $("#formName").submit(function(){;
-      var word = $('#customer_name').val();
-      var hasNumber = /^[A-Z][a-z]+$/;
+      const word = $('#customer_name').val();
+      const hasNumber = /^[A-Z][a-z]+$/;
       
       if (hasNumber.test(word)){
         return true
