@@ -41,3 +41,7 @@
   bottom:0;
 
 }
+
+input:invalid:required {
+  border: 2px solid red;
+}

@@ -25,5 +25,17 @@ function SelectingMovieOnClick() {
       
 }
 
+  function validateForm() {
+    $("#formName").submit(function(){;
+        
+      const word = $('#customer_name').val();
+      const hasNumber = /^[A-Z][a-z]+$/;
+      return hasNumber.test(word)
+   
+     })
+
+    }
+
 genre();
-SelectingMovieOnClick()
+SelectingMovieOnClick();
+validateForm();
