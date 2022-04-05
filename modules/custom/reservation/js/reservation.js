@@ -26,16 +26,19 @@ function SelectingMovieOnClick() {
 }
 
   function validateForm() {
-      let word = document.forms["formName"]["name"].value;
-      var hasNumber = /\d/;
+    $("#formName").submit(function(){;
+      let word = $('#customer_name').val();
+      var hasNumber = /^[A-Z][a-z]+$/;
       
-      if (word[0].toUpperCase() === word[0] && (hasNumber.test(word)!=true)){
-        return word;
+      if (hasNumber.test(word)){
+        return true
       } else {
-            alert("Please don't write numbers and capitalize first letter of your name !");
-            return false ;
+         alert("Please don't write numbers and capitalize first letter of your name !");
+         return false ;
       }
-     }
+     })
+    }
 
 genre();
-SelectingMovieOnClick()
+SelectingMovieOnClick();
+validateForm();
