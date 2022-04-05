@@ -15,17 +15,17 @@ function SelectingMovieOnClick() {
     $(".item").click(function(){
         if(!$(this).is('.itemChange')) {
             $(this).toggleClass('itemChange') // If there is no itemChange class, this method will add it !
-            $(".button", this).show();
+            $(".button",this).show();
         }else {
-        $(".item").removeClass("itemChange")
-        $(".button", this).hide();
+            $(".item").removeClass("itemChange")
+            $(".button",this).hide();
         }
         
     })
       
 }
 
-  function validateForm() {
+function validateForm() {
     $("#formName").submit(function(){;
         
       const word = $('#customer_name').val();
@@ -36,6 +36,28 @@ function SelectingMovieOnClick() {
 
     }
 
+function controlingModal() {
+    var modal = document.getElementById("myModal");
+    const span = document.getElementsByClassName("close")[0];
+    var btn = $(".button").attr("id") ;
+
+    $(".button").click(function() {
+        var btn = $(".button").attr("id")
+        modal.style.display = "block";
+    })
+
+    span.onclick = function() {
+    modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+        }
+    }
+}
+
 genre();
 SelectingMovieOnClick();
 validateForm();
+controlingModal()
