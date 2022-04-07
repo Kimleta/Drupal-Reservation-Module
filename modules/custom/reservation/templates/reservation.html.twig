@@ -28,7 +28,7 @@
                         <p id="movie-desc-{{movie.nid.value}}">{{movie.field_description.value | raw}}</p>
                     </div>
             </li>
-            <div id="myModal" class="modal" value="{{movie.nid.value}}">
+            <div id="myModal" class="modal">
                 <div class="modal-content">
                     <div class="modal-header">
                     <span name="close" class="close">&times;</span>
@@ -38,13 +38,15 @@
                         <h4 id="movie-title-{{movie.nid.value}}" style = "text-align:center;"> {{movie.title.value | raw}}  </h4>
                         <center><h5>Select day:</h5></center>
                         <center><form>
-                            <input type="radio" name="test">
-                            <label>{{movie.available_days.value | raw}}</label><br>
+                        {% for day in movie.field_available_days %}
+                            {% set seats = movie.field_attendants_ %}
+                            <input type="radio" name="day">
+                            <label>{{day.entity.name.value | raw}} - Available seats : {{seats.value}}</label><br>
+                        {% endfor %}
+                        <center><button name="button" type="button" class="confirmButton" style="background-color: blue">Confirm your movie reservation</button></center>
                         </form></center>
                     </div>
-                    <div class="modal-footer">
-                        <h3>Modal Footer</h3>
-                    </div>
+                    <div class="modal-footer"></div>
                 </div>
             </div>
             

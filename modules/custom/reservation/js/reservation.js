@@ -17,7 +17,7 @@ function SelectingMovieOnClick() {
             $(this).toggleClass('itemChange') // If there is no itemChange class, this method will add it !
             $(".button",this).show();
         }else {
-            $(".item").removeClass("itemChange")
+            $(".item").removeClass('itemChange')
             $(".button",this).hide();
         }
         
@@ -37,27 +37,23 @@ function validateForm() {
     }
 
 function controlingModal() {
-    var modal = document.getElementById("myModal");
-    const span = document.getElementsByClassName("close")[0];
-    var btn = $(".button").attr("id") ;
+    var modals = document.getElementsByClassName("modal");
+    var btns = document.getElementsByClassName("button");
+    var spans=document.getElementsByClassName("close");
 
-    $(".button").click(function() {
-        var btn = $(".button").attr("id")
-        modal.style.display = "block";
-    })
-
-    span.onclick = function() {
-    modal.style.display = "none";
-    }
-
-    window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
+    for(let i=0;i<btns.length;i++){
+        btns[i].onclick = function() {
+            modals[i].style.display = "block";
         }
+    }
+    for(let i=0;i<spans.length;i++){
+        spans[i].onclick = function() {
+            modals[i].style.display = "none";
+            }
     }
 }
 
 genre();
 SelectingMovieOnClick();
 validateForm();
-controlingModal()
+controlingModal();
