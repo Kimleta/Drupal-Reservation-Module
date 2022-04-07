@@ -54,10 +54,11 @@ function controlingModal() {
 }
 
 function disableInput(){
-    var popupInput = document.getElementsByClassName("popupInput");
-    for (let i=0;i<popupInput.length;i++){
-        if(popupInput[i].getAttribute("value") = 0) {
-            $(this).attr("disabled", true);
+    var popupInputs = document.getElementsByClassName("popupInput");
+    console.log(popupInputs);
+    for (var i=0; i < popupInputs.length;i++){
+        if(popupInputs[i].value == 0) {
+            popupInputs[i].setAttribute("disabled",true);
         }
     }
 }
