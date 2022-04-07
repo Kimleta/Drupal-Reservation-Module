@@ -53,7 +53,17 @@ function controlingModal() {
     }
 }
 
+function disableInput(){
+    var popupInput = document.getElementsByClassName("popupInput");
+    for (let i=0;i<popupInput.length;i++){
+        if(popupInput[i].getAttribute("value") = 0) {
+            $(this).attr("disabled", true);
+        }
+    }
+}
+
 genre();
 SelectingMovieOnClick();
 validateForm();
 controlingModal();
+disableInput();

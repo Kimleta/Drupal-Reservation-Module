@@ -40,9 +40,11 @@
                         <center><form>
                         {% for day in movie.field_available_days %}
                             {% set seats = movie.field_attendants_ %}
-                            <input type="radio" name="day">
+                            <input type="radio" name="day" value="{{seats.value}}" class="popupInput">
                             <label>{{day.entity.name.value | raw}} - Available seats : {{seats.value}}</label><br>
                         {% endfor %}
+                         <input type="radio" name="day" value="0" class="popupInput">
+                         <label>Test</label>
                         <center><button name="button" type="button" class="confirmButton" style="background-color: blue">Confirm your movie reservation</button></center>
                         </form></center>
                     </div>
