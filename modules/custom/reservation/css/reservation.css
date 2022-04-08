@@ -11,6 +11,10 @@
 
 }
 
+.list_item a {
+  display:none;
+}
+
 .list_item:hover {
   background-color:#505050 ;
   color:white;
@@ -20,6 +24,7 @@
   background-color:#505050;
   color:white;
 }
+
 
 .button {
 	display:none ;
@@ -34,7 +39,6 @@
 	font-size: 1rem;
   line-height: 1.5;
 	font-family: "Helvetica Neue", Arial, sans-serif;
-	cursor: pointer;
 	-webkit-appearance: none;
 	-webkit-font-smoothing: antialiased;
   right:0;
@@ -43,12 +47,13 @@
   cursor:default;
 }
 
+
 input:invalid:required {
   border: 2px solid red;
 }
 
  
-.modal {
+ .modal {
   display: none; 
   position: fixed; 
   z-index: 1; 
@@ -62,8 +67,14 @@ input:invalid:required {
   background-color: rgba(0,0,0,0.4); 
 }
 
+.modal:target {
+  display:block;
+}
+
+
 .modal-content {
-  position: relative;
+  padding-top: 100px; 
+  position: fixed;
   background-color: #fefefe;
   margin: auto;
   padding: 0;
@@ -73,7 +84,9 @@ input:invalid:required {
   -webkit-animation-name: animatetop;
   -webkit-animation-duration: 0.4s;
   animation-name: animatetop;
-  animation-duration: 0.4s
+  animation-duration: 0.4s ;
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
 }
 
 

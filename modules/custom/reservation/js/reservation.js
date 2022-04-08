@@ -37,25 +37,10 @@ function SelectingMovieOnClick() {
 
     }
 
-function controlingModal() {
-    var modals = document.getElementsByClassName("modal");
-    var btns = document.getElementsByClassName("button");
-    var spans=document.getElementsByClassName("close");
-
-    for(let i=0;i<btns.length;i++){
-        btns[i].onclick = function() {
-            modals[i].style.display = "block";
-        }
-    }
-    for(let i=0;i<spans.length;i++){
-        spans[i].onclick = function() {
-            modals[i].style.display = "none";
-            }
-    }
-}
 
 function disableInput(){
-    var popupInputs = document.getElementsByClassName("popupInput");
+    // var popupInputs = document.getElementsByClassName("popupInput");
+    var popupInputs = $(".popupInput") ;
     console.log(popupInputs);
     for (var i=0; i < popupInputs.length;i++){
         if(popupInputs[i].value == 0) {
@@ -67,5 +52,4 @@ function disableInput(){
 genre();
 SelectingMovieOnClick();
 validateForm();
-controlingModal();
 disableInput();

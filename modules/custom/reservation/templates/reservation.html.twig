@@ -24,14 +24,14 @@
                     <div class="item">
                         <h5 id="movie-title-{{movie.nid.value}}" style = "text-align:center;"> {{movie.title.value | raw}}  </h5>
                         <img id="movie-image-{{movie.nid.value}}" class="center" src="{{ file_url(movie.field_movie_image.entity.fileuri) }}" width="300" height="300" />
-                        <br><center><button name="button" type="button" class="button" style="background-color: blue" id="reservation-button-{{movie.nid.value}}">Reserve movie</button></center> 
+                        <br><center><a href="#myModal-{{movie.nid.value}}" class="button" id="reservation-button-{{movie.nid.value}}" style="display:none;">Reserve movie</a></center> 
                         <p id="movie-desc-{{movie.nid.value}}">{{movie.field_description.value | raw}}</p>
                     </div>
             </li>
-            <div id="myModal" class="modal">
+            <div id="myModal-{{movie.nid.value}}" class="modal" style>
                 <div class="modal-content">
                     <div class="modal-header">
-                    <span name="close" class="close">&times;</span>
+                    <a class="close" href="#">&times;</a>
                         <center><h2>Confirm your resrvation</h2><center>
                     </div>
                     <div class="modal-body">
@@ -43,7 +43,7 @@
                             <input type="radio" name="day" value="{{seats.value}}" class="popupInput">
                             <label>{{day.entity.name.value | raw}} - Available seats : {{seats.value}}</label><br>
                         {% endfor %}
-                        <center><button name="button" type="button" class="confirmButton" style="background-color: blue">Confirm your movie reservation</button></center>
+                        <center><button name="button" type="button" class="confirmButton" >Confirm your movie reservation</button></center>
                         </form></center>
                     </div>
                     <div class="modal-footer"></div>

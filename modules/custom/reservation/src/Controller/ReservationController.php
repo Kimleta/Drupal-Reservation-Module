@@ -21,7 +21,7 @@ class ReservationController{
     $query = Drupal::entityQuery('node')
      ->condition('type', 'movie');
 
-    if(!empty($genre_id)){
+    if (!empty($genre_id)){
       $query->condition('field_movie_type', $genre_id);
      }  
 
