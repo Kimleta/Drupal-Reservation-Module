@@ -39,9 +39,7 @@ function SelectingMovieOnClick() {
 
 
 function disableInput(){
-    // var popupInputs = document.getElementsByClassName("popupInput");
     var popupInputs = $(".popupInput") ;
-    console.log(popupInputs);
     for (var i=0; i < popupInputs.length;i++){
         if(popupInputs[i].value == 0) {
             popupInputs[i].setAttribute("disabled",true);
