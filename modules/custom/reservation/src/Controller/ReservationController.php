@@ -15,17 +15,18 @@ class ReservationController{
      ->getStorage('taxonomy_term')
      ->loadByProperties(['vid' => 'movie_type']);
 
+
     $genre_id = Drupal::request()->query->get('movie_type') ;
 
     $query = Drupal::entityQuery('node')
      ->condition('type', 'movie');
 
-     if(!empty($genre_id)){
+    if (!empty($genre_id)){
       $query->condition('field_movie_type', $genre_id);
      }  
 
     $movies = Node::loadMultiple($query->execute());
-
+    
     return array(
        '#theme' => 'reservation',
        '#movies' => $movies,

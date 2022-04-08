@@ -3,12 +3,16 @@ langcode: en
 status: true
 dependencies:
   config:
+    - field.field.node.movie.field_attendants_
+    - field.field.node.movie.field_available_days
     - field.field.node.movie.field_description
     - field.field.node.movie.field_movie_image
+    - field.field.node.movie.field_movie_section
     - field.field.node.movie.field_movie_type
     - field.field.node.movie.field_title
     - node.type.movie
   module:
+    - entity_reference_revisions
     - image
     - text
     - user
@@ -17,12 +21,29 @@ targetEntityType: node
 bundle: movie
 mode: default
 content:
+  field_attendants_:
+    type: number_integer
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 7
+    region: content
+  field_available_days:
+    type: entity_reference_label
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 6
+    region: content
   field_description:
     type: text_default
     label: above
     settings: {  }
     third_party_settings: {  }
-    weight: 3
+    weight: 4
     region: content
   field_movie_image:
     type: image
@@ -31,7 +52,16 @@ content:
       image_link: ''
       image_style: ''
     third_party_settings: {  }
-    weight: 2
+    weight: 3
+    region: content
+  field_movie_section:
+    type: entity_reference_revisions_entity_view
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    weight: 1
     region: content
   field_movie_type:
     type: entity_reference_label
@@ -39,7 +69,7 @@ content:
     settings:
       link: true
     third_party_settings: {  }
-    weight: 1
+    weight: 2
     region: content
   field_title:
     type: text_default
@@ -51,6 +81,6 @@ content:
   links:
     settings: {  }
     third_party_settings: {  }
-    weight: 4
+    weight: 5
     region: content
 hidden: {  }

@@ -1,0 +1,45 @@
+uuid: 75866059-5cba-4d06-b361-988c7630c7a9
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_available_days
+    - node.type.movie
+    - taxonomy.vocabulary.days
+  content:
+    - 'taxonomy_term:days:3fccbfe9-27cf-4826-be64-e5fe374b16c9'
+    - 'taxonomy_term:days:41b81c5c-d92c-4c18-9be3-ed283a02dc91'
+    - 'taxonomy_term:days:4eb48b01-db95-4d33-bee7-ef4847e0a8d8'
+    - 'taxonomy_term:days:87d22b79-76cb-4a03-8b51-0da36bbe1e31'
+    - 'taxonomy_term:days:b5eb1204-27bc-4c2f-a962-3be752a429ea'
+id: node.movie.field_available_days
+field_name: field_available_days
+entity_type: node
+bundle: movie
+label: 'Available days'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    target_uuid: b5eb1204-27bc-4c2f-a962-3be752a429ea
+  -
+    target_uuid: 4eb48b01-db95-4d33-bee7-ef4847e0a8d8
+  -
+    target_uuid: 87d22b79-76cb-4a03-8b51-0da36bbe1e31
+  -
+    target_uuid: 41b81c5c-d92c-4c18-9be3-ed283a02dc91
+  -
+    target_uuid: 3fccbfe9-27cf-4826-be64-e5fe374b16c9
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      days: days
+    sort:
+      field: name
+      direction: asc
+    auto_create: true
+    auto_create_bundle: ''
+field_type: entity_reference

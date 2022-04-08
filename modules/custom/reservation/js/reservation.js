@@ -15,15 +15,16 @@ function SelectingMovieOnClick() {
     $(".item").click(function(){
         if(!$(this).is('.itemChange')) {
             $(this).toggleClass('itemChange') // If there is no itemChange class, this method will add it !
-            $(".button", this).show();
+            $(".button",this).show();
         }else {
-        $(".item").removeClass("itemChange")
-        $(".button", this).hide();
+            $(".item").removeClass('itemChange')
+            $(".button",this).hide();
         }
         
     })
       
 }
+
 
   function validateForm() {
     $("#formName").submit(function(){;
@@ -36,6 +37,17 @@ function SelectingMovieOnClick() {
 
     }
 
+
+function disableInput(){
+    var popupInputs = $(".popupInput") ;
+    for (var i=0; i < popupInputs.length;i++){
+        if(popupInputs[i].value == 0) {
+            popupInputs[i].setAttribute("disabled",true);
+        }
+    }
+}
+
 genre();
 SelectingMovieOnClick();
 validateForm();
+disableInput();
