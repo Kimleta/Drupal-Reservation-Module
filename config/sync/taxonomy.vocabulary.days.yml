@@ -1,0 +1,8 @@
+uuid: 94ef69c4-1898-4032-ab2c-de978076626a
+langcode: en
+status: true
+dependencies: {  }
+name: Days
+vid: days
+description: 'Days for showing of movies'
+weight: 0

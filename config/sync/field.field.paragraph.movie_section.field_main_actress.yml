@@ -1,0 +1,21 @@
+uuid: 43782f9a-69f6-4fe6-a79e-8432726bcf02
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_main_actress
+    - paragraphs.paragraphs_type.movie_section
+  module:
+    - text
+id: paragraph.movie_section.field_main_actress
+field_name: field_main_actress
+entity_type: paragraph
+bundle: movie_section
+label: 'Main actress'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text

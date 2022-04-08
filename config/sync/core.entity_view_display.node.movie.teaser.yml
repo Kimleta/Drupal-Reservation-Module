@@ -4,8 +4,11 @@ status: true
 dependencies:
   config:
     - core.entity_view_mode.node.teaser
+    - field.field.node.movie.field_attendants_
+    - field.field.node.movie.field_available_days
     - field.field.node.movie.field_description
     - field.field.node.movie.field_movie_image
+    - field.field.node.movie.field_movie_section
     - field.field.node.movie.field_movie_type
     - field.field.node.movie.field_title
     - node.type.movie
@@ -22,7 +25,10 @@ content:
     weight: 100
     region: content
 hidden:
+  field_attendants_: true
+  field_available_days: true
   field_description: true
   field_movie_image: true
+  field_movie_section: true
   field_movie_type: true
   field_title: true

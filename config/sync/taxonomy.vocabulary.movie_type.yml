@@ -1,0 +1,8 @@
+uuid: 4301a18b-27b8-4ffb-9391-7d650241dd4f
+langcode: en
+status: true
+dependencies: {  }
+name: 'Movie type'
+vid: movie_type
+description: 'Vocabulary for genres'
+weight: 0

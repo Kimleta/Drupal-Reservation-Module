@@ -1,0 +1,21 @@
+uuid: 78bc6753-cd2e-4230-8e9d-93015eb82c00
+langcode: en
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.days
+  module:
+    - text
+id: taxonomy_term.days.default
+targetEntityType: taxonomy_term
+bundle: days
+mode: default
+content:
+  description:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 0
+    region: content
+hidden: {  }

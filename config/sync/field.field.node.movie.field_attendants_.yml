@@ -1,0 +1,23 @@
+uuid: f694fb44-9134-4ae3-b59a-9bfb0f19280b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_attendants_
+    - node.type.movie
+id: node.movie.field_attendants_
+field_name: field_attendants_
+entity_type: node
+bundle: movie
+label: 'Attendants '
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: null
+  max: null
+  prefix: ''
+  suffix: ''
+field_type: integer

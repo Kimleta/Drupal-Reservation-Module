@@ -1,0 +1,31 @@
+uuid: 893d8d75-f440-4b1c-8c04-d9dc7423e343
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_movie_section
+    - node.type.movie
+    - paragraphs.paragraphs_type.movie_section
+  module:
+    - entity_reference_revisions
+id: node.movie.field_movie_section
+field_name: field_movie_section
+entity_type: node
+bundle: movie
+label: 'Movie section'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      movie_section: movie_section
+    negate: 0
+    target_bundles_drag_drop:
+      movie_section:
+        weight: 2
+        enabled: true
+field_type: entity_reference_revisions

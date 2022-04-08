@@ -1,0 +1,21 @@
+uuid: 70b41924-9f70-4ae7-83d4-1f4b814ebacb
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_author
+    - paragraphs.paragraphs_type.movie_section
+  module:
+    - text
+id: paragraph.movie_section.field_author
+field_name: field_author
+entity_type: paragraph
+bundle: movie_section
+label: Author
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text
