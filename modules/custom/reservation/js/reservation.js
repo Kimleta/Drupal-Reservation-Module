@@ -11,6 +11,9 @@ $("#genre").on("change", function() {
     });
 }
 
+
+
+
 function SelectingMovieOnClick() {
     $(".item").click(function(){
         if(!$(this).is('.itemChange')) {
@@ -27,14 +30,15 @@ function SelectingMovieOnClick() {
 
 
   function validateForm() {
-    $("#formName").submit(function(){;
-        
-      const word = $('#customer_name').val();
-      const hasNumber = /^[A-Z][a-z]+$/;
-      return hasNumber.test(word)
-   
+    $("#popUpForm").submit(function(){; 
+        $("#hiddenName").val($("#customer_name").val());
+        const word = $('#hiddenName').val();
+        const hasNumber = /^[A-Z][a-z]+$/;
+        return hasNumber.test(word)
+      
+      
      })
-
+    
     }
 
 
@@ -42,12 +46,25 @@ function disableInput(){
     var popupInputs = $(".popupInput") ;
     for (var i=0; i < popupInputs.length;i++){
         if(popupInputs[i].value == 0) {
-            popupInputs[i].setAttribute("disabled",true);
-        }
+            popupInputs[i].setAttribute("disabled",true); 
+        }   
     }
 }
+
+function enableButton() {
+    $('.popupInput').click(function () {
+        if ($(this).is(':checked')) {
+            $('.confirmButton').removeAttr('disabled');
+            $('.confirmButton').css('background-color', 'green');
+        } else {
+            $('.confirmButton').attr('disabled', true);
+        }
+    });
+}
+
 
 genre();
 SelectingMovieOnClick();
 validateForm();
 disableInput();
+enableButton();
