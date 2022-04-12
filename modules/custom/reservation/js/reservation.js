@@ -1,4 +1,4 @@
-function genre() {
+function genreLoader() {
 
 $("#genre").on("change", function() {
     $.ajax({
@@ -29,7 +29,7 @@ function SelectingMovieOnClick() {
 }
 
 
-function disableInput(){
+function disableInputIfNoSeats(){
     var popupInputs = $(".popupInput") ;
     for (var i=0; i < popupInputs.length;i++){
         if(popupInputs[i].value == 0) {
@@ -42,7 +42,6 @@ function enablePopUpButton() {
     $('.popupInput').click(function () {
         if ($(this).is(':checked')) {
             $('.confirmButton').removeAttr('disabled');
-            $('.confirmButton').css('background-color', 'green');
         } else {
             $('.confirmButton').attr('disabled', true);
         }
@@ -83,8 +82,8 @@ function enablePopUpButton() {
         
  }
 
-genre();
+genreLoader();
 SelectingMovieOnClick();
-disableInput();
+disableInputIfNoSeats();
 enablePopUpButton();
 getValuesFromPopUp();
