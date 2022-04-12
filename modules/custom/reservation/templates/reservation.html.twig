@@ -1,6 +1,7 @@
 {{attach_library('reservation/reservation')}} 
 <head> 
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <meta http-equiv="cache-control" content="no-cache">
 </head>
 <body>
         <label>Please enter you name : (required)</label>
@@ -42,10 +43,10 @@
                                 <label>{{day.entity.name.value | raw}} - Available seats : {{seats.value}}</label><br>
                             {% endfor %}
 
-                            <input type="hidden" class="formTitle"  name="title" value="{{movie.title.value | raw}}" >
+                            <input type="hidden" class="movieTitle"  name="title" value="{{movie.title.value | raw}}" >
                             <input class="hiddenName" id="hiddenName" type="hidden" name="name" required >
                             {% for genre in movie.field_movie_type %}
-                                <input class="formGenre" type="hidden" name="genre" value="{{genre.entity.name.value}}">
+                                <input class="movieGenre" type="hidden" name="genre" value="{{genre.entity.name.value}}">
                             {% endfor %}
 
                             <center><button disabled name="button" type="submit" class="confirmButton">Confirm your movie reservation</button></center>

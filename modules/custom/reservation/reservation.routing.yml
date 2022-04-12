@@ -18,3 +18,4 @@ reservation.contentPost:
   methods: [POST]
   options:
     no_cache: 'TRUE'
+    

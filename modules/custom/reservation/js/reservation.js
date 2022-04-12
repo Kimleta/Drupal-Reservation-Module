@@ -29,18 +29,6 @@ function SelectingMovieOnClick() {
 }
 
 
-  function validateForm() {
-    $(".popUpForm").submit(function(){ 
-        $(".hiddenName").val($(".customer_name").val());
-        const word = $('.hiddenName').val();
-        const hasNumber = /^[A-Z][a-z]+$/;
-        return hasNumber.test(word)
-        
-     })
-    
-    }
-
-
 function disableInput(){
     var popupInputs = $(".popupInput") ;
     for (var i=0; i < popupInputs.length;i++){
@@ -50,7 +38,7 @@ function disableInput(){
     }
 }
 
-function enableButton() {
+function enablePopUpButton() {
     $('.popupInput').click(function () {
         if ($(this).is(':checked')) {
             $('.confirmButton').removeAttr('disabled');
@@ -61,38 +49,42 @@ function enableButton() {
     });
 }
 
- function getValues() {
+ function getValuesFromPopUp() {
      $(".popUpForm").submit(function(e){
         e.preventDefault();
-        var title = $(".formTitle",this).val() ;
-        var day = $("input[type=radio]:checked").val() ;
-        var genre = $(".formGenre",this).val() ;
-        var name = $(".customer_name").val() ;
+        var name = $('.customer_name').val();
+        var hasNumber = /^[A-Z][a-z]+$/;
+        if (hasNumber.test(name)){
+            var title = $(".movieTitle",this).val() ;
+            var day = $("input[type=radio]:checked").val() ;
+            var genre = $(".movieGenre",this).val() ;
 
-         $.ajax({
-             url : "insertLogic.php" ,
-             type: "POST" ,
-             data: {
-                 title : title,
-                 day : day ,
-                 genre : genre,
-                 name : name
-             } ,
-             success: function() {
-                 alert("Success ! You reserverd movie !") ;
-                 window.location.reload(); 
-             },
-             error : function(jqXHR, exception) {
-                 alert("There was error, please try again later !")
-             }
-         })
-
-     })
+            $.ajax({
+                url : "./movie-reservation?reservation" ,
+                type: "POST" ,
+                data: {
+                    title : title,
+                    day : day ,
+                    genre : genre,
+                    name : name
+                } ,
+                success: function() {
+                    alert("Success ! You reserved movie !") ;
+                    window.location.href= "./movie-reservation" ; 
+                },
+                error : function(jqXHR, exception) {
+                    alert("There was error, please try again later !")
+                }
+            })
+        } else {
+            alert("Invalid name, please start with large letter and dont put numbers or special symbols in name field !");
+        }
+    })
+        
  }
 
 genre();
 SelectingMovieOnClick();
-validateForm();
 disableInput();
-enableButton();
-getValues();
+enablePopUpButton();
+getValuesFromPopUp();
