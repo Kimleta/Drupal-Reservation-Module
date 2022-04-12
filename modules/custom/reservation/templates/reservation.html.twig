@@ -4,7 +4,7 @@
 </head>
 <body>
         <label>Please enter you name : (required)</label>
-        <input required type="text" id="customer_name" name="customer_name" title="Please use only letters" required maxlength="10">      
+        <input required type="text" id="customer_name" class="customer_name" name="customer_name" title="Please use only letters" required maxlength="10">      
     <h1> List of movies </h1>
         <h3>Please select genre : </h3>
         <select id="genre" name="genre">
@@ -33,23 +33,22 @@
                     </div>
                     <div class="modal-body">
                         <center>
-                        <form id = "popUpForm">
+                        <form id="popUpForm" class="popUpForm" method="post">
                             <h4 id="movie-title-{{movie.nid.value}}" style = "text-align:center;"> {{movie.title.value | raw}}  </h4>
                             <center><h5>Select day:</h5></center>
-
                             {% for day in movie.field_available_days %}
                                 {% set seats = movie.field_attendants_ %}
-                                <input type="radio" name="day" value="{{day.entity.name.value | raw}}" class="popupInput">
+                                <input  type="radio" name="day" value="{{day.entity.name.value | raw}}" class="popupInput">
                                 <label>{{day.entity.name.value | raw}} - Available seats : {{seats.value}}</label><br>
                             {% endfor %}
 
-                            <input type="hidden" name="title" value="{{movie.title.value | raw}}" >
-                            <input id="hiddenName" type="hidden" name="name" required >
+                            <input type="hidden" class="formTitle"  name="title" value="{{movie.title.value | raw}}" >
+                            <input class="hiddenName" id="hiddenName" type="hidden" name="name" required >
                             {% for genre in movie.field_movie_type %}
-                                <input type="hidden" name="genre" value="{{genre.entity.name.value}}">
+                                <input class="formGenre" type="hidden" name="genre" value="{{genre.entity.name.value}}">
                             {% endfor %}
 
-                            <center><button disabled name="button" class="confirmButton">Confirm your movie reservation</button></center>
+                            <center><button disabled name="button" type="submit" class="confirmButton">Confirm your movie reservation</button></center>
                         </form>
                         </center>
                     </div>

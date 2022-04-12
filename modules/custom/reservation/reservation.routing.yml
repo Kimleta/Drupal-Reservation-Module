@@ -6,4 +6,15 @@ reservation.content:
   requirements:
     _permission: 'access content'
   methods: [GET]
-  
+  options:
+    no_cache: 'TRUE'
+reservation.contentPost:
+  path: '/movie-reservation'
+  defaults:
+    _controller: '\Drupal\reservation\Controller\ReservationController::content'
+    _title: 'Reservation'
+  requirements:
+    _permission: 'access content'
+  methods: [POST]
+  options:
+    no_cache: 'TRUE'

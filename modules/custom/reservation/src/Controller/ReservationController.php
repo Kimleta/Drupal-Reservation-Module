@@ -26,7 +26,8 @@ class ReservationController{
      }  
 
     $movies = Node::loadMultiple($query->execute());
-    
+     
+
     return array(
        '#theme' => 'reservation',
        '#movies' => $movies,
@@ -34,4 +35,6 @@ class ReservationController{
        '#genres' => $genres ,
      );
   }
+
+ 
 }

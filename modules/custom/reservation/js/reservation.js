@@ -30,13 +30,12 @@ function SelectingMovieOnClick() {
 
 
   function validateForm() {
-    $("#popUpForm").submit(function(){; 
-        $("#hiddenName").val($("#customer_name").val());
-        const word = $('#hiddenName').val();
+    $(".popUpForm").submit(function(){ 
+        $(".hiddenName").val($(".customer_name").val());
+        const word = $('.hiddenName').val();
         const hasNumber = /^[A-Z][a-z]+$/;
         return hasNumber.test(word)
-      
-      
+        
      })
     
     }
@@ -62,9 +61,38 @@ function enableButton() {
     });
 }
 
+ function getValues() {
+     $(".popUpForm").submit(function(e){
+        e.preventDefault();
+        var title = $(".formTitle",this).val() ;
+        var day = $("input[type=radio]:checked").val() ;
+        var genre = $(".formGenre",this).val() ;
+        var name = $(".customer_name").val() ;
+
+         $.ajax({
+             url : "insertLogic.php" ,
+             type: "POST" ,
+             data: {
+                 title : title,
+                 day : day ,
+                 genre : genre,
+                 name : name
+             } ,
+             success: function() {
+                 alert("Success ! You reserverd movie !") ;
+                 window.location.reload(); 
+             },
+             error : function(jqXHR, exception) {
+                 alert("There was error, please try again later !")
+             }
+         })
+
+     })
+ }
 
 genre();
 SelectingMovieOnClick();
 validateForm();
 disableInput();
 enableButton();
+getValues();
