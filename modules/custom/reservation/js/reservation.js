@@ -1,4 +1,4 @@
-function genre() {
+function genreLoader() {
 
 $("#genre").on("change", function() {
     $.ajax({
@@ -10,6 +10,9 @@ $("#genre").on("change", function() {
         });
     });
 }
+
+
+
 
 function SelectingMovieOnClick() {
     $(".item").click(function(){
@@ -26,28 +29,61 @@ function SelectingMovieOnClick() {
 }
 
 
-  function validateForm() {
-    $("#formName").submit(function(){;
-        
-      const word = $('#customer_name').val();
-      const hasNumber = /^[A-Z][a-z]+$/;
-      return hasNumber.test(word)
-   
-     })
-
-    }
-
-
-function disableInput(){
+function disableInputIfNoSeats(){
     var popupInputs = $(".popupInput") ;
     for (var i=0; i < popupInputs.length;i++){
         if(popupInputs[i].value == 0) {
-            popupInputs[i].setAttribute("disabled",true);
-        }
+            popupInputs[i].setAttribute("disabled",true); 
+        }   
     }
 }
 
-genre();
+function enablePopUpButton() {
+    $('.popupInput').click(function () {
+        if ($(this).is(':checked')) {
+            $('.confirmButton').removeAttr('disabled');
+        } else {
+            $('.confirmButton').attr('disabled', true);
+        }
+    });
+}
+
+ function getValuesFromPopUp() {
+     $(".popUpForm").submit(function(e){
+        e.preventDefault();
+        var name = $('.customer_name').val();
+        var hasNumber = /^[A-Z][a-z]+$/;
+        if (hasNumber.test(name)){
+            var title = $(".movieTitle",this).text().trim() ;
+            var day = $("input[type=radio]:checked").val() ;
+            var genre = $(".movieGenre",this).val() ;
+            
+            $.ajax({
+                url : "./movie-reservation?reservation" ,
+                type: "POST" ,
+                data: {
+                    title : title,
+                    day : day ,
+                    genre : genre,
+                    name : name
+                } ,
+                success: function() {
+                    alert("Success ! You reserved movie !") ;
+                    window.location.href= "./movie-reservation" ; 
+                },
+                error : function(jqXHR, exception) {
+                    alert("There was error, please try again later !")
+                }
+            })
+        } else {
+            alert("Invalid name, please start with large letter and dont put numbers or special symbols in name field !");
+        }
+    })
+        
+ }
+
+genreLoader();
 SelectingMovieOnClick();
-validateForm();
-disableInput();
+disableInputIfNoSeats();
+enablePopUpButton();
+getValuesFromPopUp();

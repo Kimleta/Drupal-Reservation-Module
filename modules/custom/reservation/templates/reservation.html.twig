@@ -1,13 +1,11 @@
 {{attach_library('reservation/reservation')}} 
 <head> 
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <meta http-equiv="cache-control" content="no-cache">
 </head>
 <body>
-    <form id="formName" name="formName">
-            <label>Please enter you name : (required)</label>
-            <input type="text" id="customer_name" name="customer_name"
-             title="Please use only letters" required maxlength="10">      
-    </form>
+        <label>Please enter you name : (required)</label>
+        <input required type="text" id="customer_name" class="customer_name" name="customer_name" title="Please use only letters" required maxlength="10">      
     <h1> List of movies </h1>
         <h3>Please select genre : </h3>
         <select id="genre" name="genre">
@@ -35,16 +33,22 @@
                         <center><h2>Confirm your resrvation</h2><center>
                     </div>
                     <div class="modal-body">
-                        <h4 id="movie-title-{{movie.nid.value}}" style = "text-align:center;"> {{movie.title.value | raw}}  </h4>
-                        <center><h5>Select day:</h5></center>
-                        <center><form>
-                        {% for day in movie.field_available_days %}
-                            {% set seats = movie.field_attendants_ %}
-                            <input type="radio" name="day" value="{{seats.value}}" class="popupInput">
-                            <label>{{day.entity.name.value | raw}} - Available seats : {{seats.value}}</label><br>
-                        {% endfor %}
-                        <center><button name="button" type="button" class="confirmButton" >Confirm your movie reservation</button></center>
-                        </form></center>
+                        <center>
+                        <form id="popUpForm" class="popUpForm">
+                            <h4 class="movieTitle" id="movie-title-{{movie.nid.value}}" style = "text-align:center;">{{movie.title.value | raw}}</h4>
+                            <center><h5>Select day:</h5></center>
+                            {% for day in movie.field_available_days %}
+                                {% set seats = movie.field_attendants_ %}
+                                <input  type="radio" name="day" value="{{day.entity.name.value | raw}}" class="popupInput">
+                                <label>{{day.entity.name.value | raw}} - Available seats : {{seats.value}}</label><br>
+                            {% endfor %}
+                            {% for genre in movie.field_movie_type %}
+                                <input class="movieGenre" type="hidden" name="genre" value="{{genre.entity.name.value}}">
+                            {% endfor %}
+
+                            <center><button disabled name="button" type="submit" class="confirmButton">Confirm your movie reservation</button></center>
+                        </form>
+                        </center>
                     </div>
                     <div class="modal-footer"></div>
                 </div>

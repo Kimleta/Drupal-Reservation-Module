@@ -134,7 +134,7 @@ input:invalid:required {
   padding: 0.75rem 1rem;
 	border: 0;
 	border-radius: 0.317rem;
-	background-color: #aaa;
+	background-color: green;
 	color: #fff;
 	text-decoration: none;
 	font-weight: 700;
@@ -148,6 +148,11 @@ input:invalid:required {
   bottom:0;
   z-index:10;
 }
+
 input:invalid:required {
   border: 2px solid red;
+}
+
+.confirmButton:disabled {
+  background-color : #aaa;
 }

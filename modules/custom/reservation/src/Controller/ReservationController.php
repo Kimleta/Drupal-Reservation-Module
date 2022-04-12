@@ -26,7 +26,30 @@ class ReservationController{
      }  
 
     $movies = Node::loadMultiple($query->execute());
-    
+
+    $reservation = Drupal::request()->query->get('reservation') ;
+
+    if (isset($reservation)) {
+      $connection = \Drupal::database();
+
+      $title = Drupal::request()->get('title') ;
+      $day = Drupal::request()->get('day');
+      $genre = Drupal::request()->get('genre');
+      $name = Drupal::request()->get('name');
+      $date = date('Y-m-d H:i:s') ;
+      $a = 1 ;
+      $result = $connection->insert('reservations')
+      ->fields([
+        'day_of_reservation' => $day,
+        'time_of_reservation' => $date,
+        'reserved_movie_name' => $title,
+        'reserved_movie_genre' => $genre,
+        'customer_name' => $name,
+        ])->execute();
+
+    }
+     
+
     return array(
        '#theme' => 'reservation',
        '#movies' => $movies,
@@ -34,4 +57,6 @@ class ReservationController{
        '#genres' => $genres ,
      );
   }
+
+ 
 }
