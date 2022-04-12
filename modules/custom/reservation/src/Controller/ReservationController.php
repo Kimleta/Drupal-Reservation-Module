@@ -32,12 +32,12 @@ class ReservationController{
     if (isset($reservation)) {
       $connection = \Drupal::database();
 
-      $title = $_POST["title"];
-      $day = $_POST["day"];
-      $genre = $_POST["genre"];
-      $name = $_POST["name"];
+      $title = Drupal::request()->get('title') ;
+      $day = Drupal::request()->get('day');
+      $genre = Drupal::request()->get('genre');
+      $name = Drupal::request()->get('name');
       $date = date('Y-m-d H:i:s') ;
-
+      $a = 1 ;
       $result = $connection->insert('reservations')
       ->fields([
         'day_of_reservation' => $day,

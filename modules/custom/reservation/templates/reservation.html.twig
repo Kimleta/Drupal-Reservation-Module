@@ -34,17 +34,14 @@
                     </div>
                     <div class="modal-body">
                         <center>
-                        <form id="popUpForm" class="popUpForm" method="post">
-                            <h4 id="movie-title-{{movie.nid.value}}" style = "text-align:center;"> {{movie.title.value | raw}}  </h4>
+                        <form id="popUpForm" class="popUpForm">
+                            <h4 class="movieTitle" id="movie-title-{{movie.nid.value}}" style = "text-align:center;">{{movie.title.value | raw}}</h4>
                             <center><h5>Select day:</h5></center>
                             {% for day in movie.field_available_days %}
                                 {% set seats = movie.field_attendants_ %}
                                 <input  type="radio" name="day" value="{{day.entity.name.value | raw}}" class="popupInput">
                                 <label>{{day.entity.name.value | raw}} - Available seats : {{seats.value}}</label><br>
                             {% endfor %}
-
-                            <input type="hidden" class="movieTitle"  name="title" value="{{movie.title.value | raw}}" >
-                            <input class="hiddenName" id="hiddenName" type="hidden" name="name" required >
                             {% for genre in movie.field_movie_type %}
                                 <input class="movieGenre" type="hidden" name="genre" value="{{genre.entity.name.value}}">
                             {% endfor %}

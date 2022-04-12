@@ -55,10 +55,10 @@ function enablePopUpButton() {
         var name = $('.customer_name').val();
         var hasNumber = /^[A-Z][a-z]+$/;
         if (hasNumber.test(name)){
-            var title = $(".movieTitle",this).val() ;
+            var title = $(".movieTitle",this).text().trim() ;
             var day = $("input[type=radio]:checked").val() ;
             var genre = $(".movieGenre",this).val() ;
-
+            
             $.ajax({
                 url : "./movie-reservation?reservation" ,
                 type: "POST" ,
