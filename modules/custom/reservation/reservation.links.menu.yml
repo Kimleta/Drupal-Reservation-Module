@@ -1,0 +1,6 @@
+reservation.admin:
+  title: 'Movie Exporter'
+  description: 'Export list of Movies'
+  parent: system.admin_config_development
+  route_name: reservation.MovieExporter
+  weight: 100

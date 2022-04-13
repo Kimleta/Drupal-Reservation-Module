@@ -18,3 +18,10 @@ reservation.contentPost:
   methods: [POST]
   options:
     no_cache: 'TRUE'
+reservation.MovieExporter:
+  path: '/admin/config/movie-exporter'
+  defaults:
+    _form: Drupal\reservation\Form\MovieExporter
+    _title: 'Movie Exporter'
+  requirements:
+    _permission: 'administer site configuration'

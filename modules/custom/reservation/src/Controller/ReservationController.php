@@ -37,7 +37,7 @@ class ReservationController{
       $genre = Drupal::request()->get('genre');
       $name = Drupal::request()->get('name');
       $date = date('Y-m-d H:i:s') ;
-      $a = 1 ;
+      
       $result = $connection->insert('reservations')
       ->fields([
         'day_of_reservation' => $day,
