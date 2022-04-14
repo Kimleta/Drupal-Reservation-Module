@@ -8,6 +8,7 @@ use Drupal\Core\Form\FormStateInterface;
 use \Drupal\node\Entity\Node;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Serializer\Encoder\XmlEncoder;
+
 class MovieExporter extends ConfigFormBase {
     
     protected function getEditableConfigNames() {
@@ -85,7 +86,8 @@ class MovieExporter extends ConfigFormBase {
                     'Genre' => implode(' ',$genres) ,
                 ];
                 
-                if(!isset($title)) {
+                
+                if(empty($title)) {
                     return FALSE ;
                 } else {
                     array_push($arrayMovies,$arrayMovie);
