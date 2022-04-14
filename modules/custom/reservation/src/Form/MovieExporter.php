@@ -7,7 +7,7 @@ use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use \Drupal\node\Entity\Node;
 use Symfony\Component\Validator\Constraints\Length;
-
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
 class MovieExporter extends ConfigFormBase {
     
     protected function getEditableConfigNames() {
@@ -51,7 +51,6 @@ class MovieExporter extends ConfigFormBase {
             $form['movieOptions']['#options'][] = $title;
         }
 
-        $test = 1 ;
         return parent::buildForm($form, $form_state);
     }
   
@@ -59,37 +58,56 @@ class MovieExporter extends ConfigFormBase {
 
         $extension =  $form_state->getValue('extension') ;
         $selectedMoviesForExport = $form_state->getValue('movieOptions') ;
-        $checkedMovies = [] ;
+        $checkedMovies = [];
         foreach($selectedMoviesForExport as $checked) { //getting values of every checkbox
             if ($checked !== 0) { //check if checkbox is selected 
-                array_push($checkedMovies,$checked); //push checked keys into array
+                array_push($checkedMovies,$checked+1); //push checked keys into array and itterates them for one, becouse node::load will not work with 0
             }
         }
 
-        $arrayT = [];
-        foreach($checkedMovies as $checkedMovie) { //loading node of checked movies 
-            $node =Node::load($checkedMovie) ;
-            $title =$node->getTitle();
-            $days = $node->field_available_days->referencedEntities();
-            $genre = $node->field_movie_type->referencedEntities();
-            $disc = $node->field_description->value;
-            $nodeArray = [
-                'Title' => $title ,
-                'Discription' => $disc ,
-                'Available days' => $days ,
-                'Genre' => $genre ,
-            ];
+        $nodes =Node::loadMultiple($checkedMovies) ;
+        $arrayMovies = [] ;
+            foreach($nodes as $node) {
+                $title = $node->title->value;
+                $days = $node->field_available_days->referencedEntities();
+                foreach($days as &$day) {
+                    $day = $day->getName();
+                }
+                $genres = $node->field_movie_type->referencedEntities();
+                foreach($genres as &$genre) {
+                    $genre = $genre->getName();
+                }
+                $disc = $node->field_description->value;
+                $arrayMovie = [
+                    'Title' => $title ,
+                    'Discription' => strip_tags($disc) ,
+                    'Available days' =>  implode(' ', $days) ,
+                    'Genre' => implode(' ',$genres) ,
+                ];
+                
+                if(!isset($title)) {
+                    return FALSE ;
+                } else {
+                    array_push($arrayMovies,$arrayMovie);
+                    }
+            
+                }
 
-            if(!isset($title)) {
-                return FALSE ;
-            } else {
-                array_push($arrayT,$nodeArray) ;
+        if($extension == "csv") { 
+            $csvName = "testing.csv";
+            $fileHandle = fopen($csvName, 'w') or die('Can\'t create .csv file, try again later.');
+            foreach($arrayMovies as $movie) {
+                fputcsv($fileHandle,$movie) ;
             }
-
-
+            fclose($fileHandle);
+        } else{
+            $xmlEncoder = new XmlEncoder();
+            header("Content-type: text/xml");
+            header("Content-Disposition: attachment; filename=testing.xml");
+            $xmlFile = $xmlEncoder->encode($arrayMovie, 'xml');
+            exit($xmlFile);
         }
 
-        $test = 1 ;
 
         parent::submitForm($form, $form_state);
 
