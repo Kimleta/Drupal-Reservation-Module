@@ -61,7 +61,7 @@ class MovieExporter extends ConfigFormBase {
         $selectedMoviesForExport = $form_state->getValue('movieOptions') ;
         $checkedMovies = [];
         foreach($selectedMoviesForExport as $checked) { //getting values of every checkbox
-            if ($checked !== 0) { //check if checkbox is selected 
+            if($checked !== 0) { //check if checkbox is selected 
                 array_push($checkedMovies,$checked+1); //push checked keys into array and itterates them for one, becouse node::load will not work with 0
             }
         }
@@ -86,10 +86,9 @@ class MovieExporter extends ConfigFormBase {
                     'Genre' => implode(' ',$genres) ,
                 ];
                 
-                
                 if(empty($title)) {
                     return FALSE ;
-                } else {
+                }else {
                     array_push($arrayMovies,$arrayMovie);
                     }
             
@@ -102,14 +101,13 @@ class MovieExporter extends ConfigFormBase {
                 fputcsv($fileHandle,$movie) ;
             }
             fclose($fileHandle);
-        } else{
+        }else {
             $xmlEncoder = new XmlEncoder();
             header("Content-type: text/xml");
             header("Content-Disposition: attachment; filename=testing.xml");
             $xmlFile = $xmlEncoder->encode($arrayMovie, 'xml');
             exit($xmlFile);
         }
-
 
         parent::submitForm($form, $form_state);
 
