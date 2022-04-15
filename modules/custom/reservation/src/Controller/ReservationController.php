@@ -21,7 +21,7 @@ class ReservationController{
     $query = Drupal::entityQuery('node')
      ->condition('type', 'movie');
 
-    if (!empty($genre_id)){
+    if(!empty($genre_id)) {
       $query->condition('field_movie_type', $genre_id);
      }  
 
@@ -29,7 +29,7 @@ class ReservationController{
 
     $reservation = Drupal::request()->query->get('reservation') ;
 
-    if (isset($reservation)) {
+    if(isset($reservation)) {
       $connection = \Drupal::database();
 
       $title = Drupal::request()->get('title') ;
@@ -37,7 +37,7 @@ class ReservationController{
       $genre = Drupal::request()->get('genre');
       $name = Drupal::request()->get('name');
       $date = date('Y-m-d H:i:s') ;
-      $a = 1 ;
+      
       $result = $connection->insert('reservations')
       ->fields([
         'day_of_reservation' => $day,
