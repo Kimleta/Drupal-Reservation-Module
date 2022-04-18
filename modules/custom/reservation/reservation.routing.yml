@@ -25,3 +25,13 @@ reservation.MovieExporter:
     _title: 'Movie Exporter'
   requirements:
     _permission: 'administer site configuration'
+reservation.bookShowcase:
+  path: '/book-showcase'
+  defaults:
+    _controller: '\Drupal\reservation\Controller\ReservationController::bookContent'
+    _title: 'Book Showcase'
+  requirements:
+    _permission: 'access content'
+  methods: [GET]
+  options:
+    no_cache: 'TRUE'

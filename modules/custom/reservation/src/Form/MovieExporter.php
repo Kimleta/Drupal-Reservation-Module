@@ -40,7 +40,7 @@ class MovieExporter extends ConfigFormBase {
                 'xml' => ('XML') ,
             ),
         );
-        
+
         $form['movieOptions'] = array(
             '#type' => 'checkboxes',
             '#title' => ('Select what movies you want to export'),

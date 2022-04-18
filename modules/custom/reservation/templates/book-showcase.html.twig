@@ -1,0 +1,9 @@
+<ol>
+{% for book in books %}
+    <li>
+        <h1>{{book.title.value}}</h1>
+        <p>ISBN : {{book.field_isbn.value}}</p>
+        <p>Price : {{book.field_price.value}}$</p>
+    </li>
+{% endfor %}
+</ol>
