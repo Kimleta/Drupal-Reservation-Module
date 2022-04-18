@@ -101,8 +101,6 @@ class ReservationController{
 
         $nodeBook->save();
 
-        
-
         $nid = $nodeBook->id(); //Get id of created node
 
         // I  didn't wanted to repeat same code , so I initialized just once $values, and depedent if $bookComents is array
@@ -118,7 +116,7 @@ class ReservationController{
           'comment_body' => '',            
           'status' => 1,                      
         ];
-        
+
         if($bookComments) { // check if there is comment
           if(is_array($bookComments)){ //check if there is more comments
             foreach($bookComments as $comment) { //if answer is TRUE , than loop into array
