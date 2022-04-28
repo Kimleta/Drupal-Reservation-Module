@@ -28,7 +28,7 @@ reservation.MovieExporter:
 reservation.bookShowcase:
   path: '/book-showcase'
   defaults:
-    _controller: '\Drupal\reservation\Controller\ReservationController::bookContent'
+    _controller: '\Drupal\reservation\Controller\ReservationController::importBookContent'
     _title: 'Book Showcase'
   requirements:
     _permission: 'access content'

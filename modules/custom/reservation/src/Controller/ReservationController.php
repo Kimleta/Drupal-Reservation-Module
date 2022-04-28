@@ -61,7 +61,7 @@ class ReservationController{
      );
   }
 
-  public function bookContent() {
+  public function importBookContent() {
 
     $xmlrouter = new XMLroute() ;
 
@@ -74,13 +74,12 @@ class ReservationController{
 
     foreach($getBooks as $book) {
       $bookComments = $book["comments"]["userComment"] ;
-      if(!empty($bookComments)) {
+      if($bookComments) {
           if(is_array($bookComments)){
               foreach($bookComments as &$bookComment) {
                   $bookComment = trim($bookComment) ;
               }
-            
-          }else{
+          }else {
               $bookComments = trim($bookComments) ;
           }
       } 
@@ -117,19 +116,18 @@ class ReservationController{
           'status' => 1,                      
         ];
 
-        if($bookComments) { // check if there is comment
-          if(is_array($bookComments)){ //check if there is more comments
-            foreach($bookComments as $comment) { //if answer is TRUE , than loop into array
-                $values['comment_body'] = $comment; // change value of specific key
-                $commentor = Comment::create($values);
-                $commentor->save();
-            }
-          }else{ //if answer is FALSE, then just change value of specific key
+        if($bookComments && is_array($bookComments) ) { // check if there is comment and check if there is more comments
+          foreach($bookComments as $comment) { //if answer is TRUE , than loop into array
+            $values['comment_body'] = $comment; // change value of specific key
+            $commentor = Comment::create($values);
+            $commentor->save();
+          }
+        }else{ //if answer is FALSE, then just change value of specific key
             $values['comment_body'] = $bookComments;
             $commentor = Comment::create($values);
             $commentor->save();
           }
-        } 
+         
     }
 
   }
