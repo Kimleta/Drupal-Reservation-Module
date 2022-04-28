@@ -5,7 +5,7 @@
         'reservation' => array(
             'variables' => array('movies' => array(), 'title' => '', 'genres' => array()),
         ),
-        'book-showcase'=>array(
+        'book-showcase' => array(
             'variables' => array('books' => array(), 'title' => ''),
         ),
     );
