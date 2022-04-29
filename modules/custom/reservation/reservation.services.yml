@@ -1,0 +1,3 @@
+services:
+  reservation.xmlroute:
+    class: Drupal\reservation\Services\XMLroute
