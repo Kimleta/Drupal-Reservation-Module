@@ -9,6 +9,6 @@ the [Drupal community][Drupal community].
 
 Developed this custom module for reservation of movies in cinema as project for intership in "Bee IT LLC" .
 
-See my other projects at [horvatovmiroslav.me] . 
+See my other projects at www.horvatovmiroslav.me . 
 
-Contact info : [https://www.linkedin.com/in/miroslav-horvatov-a85897192/]
+Contact info : https://www.linkedin.com/in/miroslav-horvatov-a85897192/
