@@ -4,6 +4,7 @@ namespace Drupal\reservation\Controller;
 
 use Drupal;
 use Drupal\comment\Entity\Comment;
+use Drupal\reservation\Services\GetReservations;
 use Drupal\reservation\Services\XMLroute;
 use Symfony\Component\HttpFoundation\Request;
 use \Drupal\node\Entity\Node;
@@ -16,18 +17,9 @@ class ReservationController
 
         $connection = Drupal::database();
 
-        $reservationQuery = $connection->query("SELECT `reserved_movie_name`,`day_of_reservation` FROM `reservations`");
-        $reservationQueryResult = $reservationQuery->fetchAll();
-        $decodedReservationQuery = json_decode(json_encode($reservationQueryResult), true);
+        $getReservations = new GetReservations();
 
-        $reservedDays = [];
-        foreach ($decodedReservationQuery as $key => $value) {
-            $reservedDays[$value['reserved_movie_name']][$key] = $value['day_of_reservation'];
-        }
-
-        foreach ($reservedDays as $key => $value) {
-            $reservedDays[$key] = array_count_values($value);
-        }
+        $reservations = $getReservations->getReservations();
 
         $genres = Drupal::entityTypeManager()
             ->getStorage('taxonomy_term')
@@ -48,10 +40,12 @@ class ReservationController
 
         if (isset($reservation)) {
 
-            $title = Drupal::request()->get('title');
-            $day = Drupal::request()->get('day');
-            $genre = Drupal::request()->get('genre');
-            $name = Drupal::request()->get('name');
+            $dataArray = Drupal::request()->get('dataArray');
+
+            $title = $dataArray[0];
+            $day = $dataArray[1];
+            $genre = $dataArray[2];
+            $name = $dataArray[3];
             $date = date('Y-m-d H:i:s');
 
             $result = $connection->insert('Reservations')
@@ -69,7 +63,7 @@ class ReservationController
             '#movies' => $movies,
             '#title' => 'Welcome to movie reservation page',
             '#genres' => $genres,
-            '#reservedDays' => $reservedDays,
+            '#reservations' => $reservations,
         );
     }
 

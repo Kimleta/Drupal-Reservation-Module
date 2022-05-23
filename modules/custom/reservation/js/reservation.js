@@ -59,22 +59,21 @@ function getValuesFromPopUp() {
             var title = $(".movieTitle", this).text().trim();
             var day = $("input[type=radio]:checked").attr('id');
             var genre = $(".movieGenre", this).val();
+            var dataArray = [title, day, genre, name];
 
             $.ajax({
                 url: "./movie-reservation?reservation",
                 type: "POST",
                 data: {
-                    title: title,
-                    day: day,
-                    genre: genre,
-                    name: name
+                    dataArray: dataArray
                 },
                 success: function () {
                     alert("Success ! You reserved movie !");
                     window.location.href = "./movie-reservation";
                 },
                 error: function (jqXHR, exception) {
-                    alert("There was error, please try again later !")
+                    debugger;
+                    alert("There was error, please try again later !");
                 }
             })
         } else {

@@ -41,7 +41,7 @@
                             {% for day in movie.field_available_days %}
                                 {% set seats = movie.field_attendants_ %}
                                 {% set loopedDay = day.entity.name.value | raw %}
-                                {% set reservedSeats = reservedDays[movieName][loopedDay] %}
+                                {% set reservedSeats = reservations[movieName][loopedDay] %}
                                 {% set realSeats = seats.value - reservedSeats %}
                                 <input  type="radio" name="day" id="{{day.entity.name.value | raw}}" value="{{ realSeats }} " class="popupInput">
                                 <label for="{{day.entity.name.value | raw}}" >{{day.entity.name.value | raw}} - Available seats : {{ realSeats }}</label><br>
