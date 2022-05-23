@@ -4,9 +4,11 @@ namespace Drupal\reservation\Services;
 
 use Drupal;
 
-class GetReservations {
+class GetReservations
+{
 
-    public function getReservations() {
+    public function getReservations()
+    {
 
         $connection = Drupal::database();
 
@@ -23,12 +25,8 @@ class GetReservations {
             $reservedDays[$key] = array_count_values($value);
         }
 
-        return $reservedDays ;
+        return $reservedDays;
 
     }
 
-
 }
-
-
-?>
