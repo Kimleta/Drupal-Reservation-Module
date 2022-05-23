@@ -14,6 +14,21 @@ class ReservationController
     public function content()
     {
 
+        $connection = Drupal::database();
+
+        $reservationQuery = $connection->query("SELECT `reserved_movie_name`,`day_of_reservation` FROM `reservations`");
+        $reservationQueryResult = $reservationQuery->fetchAll();
+        $decodedReservationQuery = json_decode(json_encode($reservationQueryResult), true);
+
+        $reservedDays = [];
+        foreach ($decodedReservationQuery as $key => $value) {
+            $reservedDays[$value['reserved_movie_name']][$key] = $value['day_of_reservation'];
+        }
+
+        foreach ($reservedDays as $key => $value) {
+            $reservedDays[$key] = array_count_values($value);
+        }
+
         $genres = Drupal::entityTypeManager()
             ->getStorage('taxonomy_term')
             ->loadByProperties(['vid' => 'movie_type']);
@@ -32,7 +47,6 @@ class ReservationController
         $reservation = Drupal::request()->query->get('reservation');
 
         if (isset($reservation)) {
-            $connection = Drupal::database();
 
             $title = Drupal::request()->get('title');
             $day = Drupal::request()->get('day');
@@ -40,7 +54,7 @@ class ReservationController
             $name = Drupal::request()->get('name');
             $date = date('Y-m-d H:i:s');
 
-            $result = $connection->insert('reservations')
+            $result = $connection->insert('Reservations')
                 ->fields([
                     'day_of_reservation' => $day,
                     'time_of_reservation' => $date,
@@ -48,7 +62,6 @@ class ReservationController
                     'reserved_movie_genre' => $genre,
                     'customer_name' => $name,
                 ])->execute();
-
         }
 
         return array(
@@ -56,6 +69,7 @@ class ReservationController
             '#movies' => $movies,
             '#title' => 'Welcome to movie reservation page',
             '#genres' => $genres,
+            '#reservedDays' => $reservedDays,
         );
     }
 
@@ -87,7 +101,8 @@ class ReservationController
                 ->getStorage('node')
                 ->loadByProperties([
                     'type' => 'book',
-                    'field_isbn' => $book["@attributes"]["ISBN"]]);
+                    'field_isbn' => $book["@attributes"]["ISBN"],
+                ]);
 
             if (!$data) {
                 $nodeBook = Node::create([
@@ -126,9 +141,7 @@ class ReservationController
                     $commentor = Comment::create($values);
                     $commentor->save();
                 }
-
             }
-
         }
 
         return array(
