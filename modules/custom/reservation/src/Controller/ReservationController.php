@@ -145,4 +145,23 @@ class ReservationController
         );
     }
 
+    public function getReservations()
+    {
+
+        $getMovieReservation = Drupal::request()->query->get('reserve');
+
+        if ($getMovieReservation) {
+            $connection = Drupal::database();
+
+            $getReservations = new GetReservations();
+
+            $reservations = $getReservations->getReservations();
+
+            return array(
+                '#reservations' => $reservations,
+            );
+        }
+
+    }
+
 }

@@ -72,7 +72,6 @@ function getValuesFromPopUp() {
                     window.location.href = "./movie-reservation";
                 },
                 error: function (jqXHR, exception) {
-                    debugger;
                     alert("There was error, please try again later !");
                 }
             })
@@ -83,9 +82,30 @@ function getValuesFromPopUp() {
 
 }
 
+function getMovieReservation() {
+
+    $(".button").click(function () {
+        var href = $(this).attr('href');
+        $.ajax({
+            method: "GET",
+            url: "./movie-reservation?reserve",
+            success: function () {
+                window.location.href = "./movie-reservation?reserve" + href;
+            },
+            error: function (jqXHR, exception) {
+                alert("There was error, please try again later !");
+            }
+        });
+    });
+
+
+
+}
+
 
 genreLoader();
 SelectingMovieOnClick();
 disableInputIfNoSeats();
 enablePopUpButton();
 getValuesFromPopUp();
+getMovieReservation();

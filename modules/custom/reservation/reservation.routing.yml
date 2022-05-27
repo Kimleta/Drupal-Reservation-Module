@@ -35,3 +35,13 @@ reservation.bookShowcase:
   methods: [GET]
   options:
     no_cache: 'TRUE'
+reservation.getReservations:
+  path: '/movie-reservation'
+  defaults:
+    _controller: '\Drupal\reservation\Controller\ReservationController::getReservations'
+    _title: 'Movie reservation'
+  requirements:
+    _permission: 'access content'
+  methods: [GET]
+  options:
+    no_cache: 'TRUE'
