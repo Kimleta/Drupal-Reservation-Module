@@ -17,10 +17,6 @@ class ReservationController
 
         $connection = Drupal::database();
 
-        $getReservations = new GetReservations();
-
-        $reservations = $getReservations->getReservations();
-
         $genres = Drupal::entityTypeManager()
             ->getStorage('taxonomy_term')
             ->loadByProperties(['vid' => 'movie_type']);
@@ -38,7 +34,19 @@ class ReservationController
 
         $reservation = Drupal::request()->query->get('reservation');
 
+        $getMovieReservation = Drupal::request()->query->get('reserve');
+
+        if (isset($getMovieReservation)) {
+            $connection = Drupal::database();
+
+            $getReservations = new GetReservations();
+
+            $reservations = $getReservations->getReservations();
+        }
+
         if (isset($reservation)) {
+
+            $connection = Drupal::database();
 
             $dataArray = Drupal::request()->get('dataArray');
 
@@ -143,25 +151,6 @@ class ReservationController
             '#books' => $books,
             '#title' => 'Book Showcase',
         );
-    }
-
-    public function getReservations()
-    {
-
-        $getMovieReservation = Drupal::request()->query->get('reserve');
-
-        if ($getMovieReservation) {
-            $connection = Drupal::database();
-
-            $getReservations = new GetReservations();
-
-            $reservations = $getReservations->getReservations();
-
-            return array(
-                '#reservations' => $reservations,
-            );
-        }
-
     }
 
 }
