@@ -22,11 +22,11 @@
                     <div class="item">
                         <h5 id="movie-title-{{movie.nid.value}}" style = "text-align:center;"> {{movie.title.value | raw}}  </h5>
                         <img id="movie-image-{{movie.nid.value}}" class="center" src="{{ file_url(movie.field_movie_image.entity.fileuri) }}" width="300" height="300" />
-                        <br><center><a href="#myModal-{{movie.nid.value}}" class="button" id="reservation-button-{{movie.nid.value}}" style="display:none;">Reserve movie</a></center> 
+                        <br><center><a href="#myModal-{{movie.title.value}}" class="button" id="reservation-button-{{movie.nid.value}}" style="display:none;">Reserve movie</a></center> 
                         <p id="movie-desc-{{movie.nid.value}}">{{movie.field_description.value | raw}}</p>
                     </div>
             </li>
-            <div id="myModal-{{movie.nid.value}}" class="modal" style>
+            <div id="myModal-{{movie.title.value}}" class="modal">
                 <div class="modal-content">
                     <div class="modal-header">
                     <a class="close" href="#">&times;</a>
@@ -35,12 +35,16 @@
                     <div class="modal-body">
                         <center>
                         <form id="popUpForm" class="popUpForm">
+                        {% set movieName = movie.title.value | raw %}
                             <h4 class="movieTitle" id="movie-title-{{movie.nid.value}}" style = "text-align:center;">{{movie.title.value | raw}}</h4>
                             <center><h5>Select day:</h5></center>
                             {% for day in movie.field_available_days %}
                                 {% set seats = movie.field_attendants_ %}
-                                <input  type="radio" name="day" value="{{day.entity.name.value | raw}}" class="popupInput">
-                                <label>{{day.entity.name.value | raw}} - Available seats : {{seats.value}}</label><br>
+                                {% set loopedDay = day.entity.name.value | raw %}
+                                {% set reservedSeats = reservations[movieName][loopedDay] %}
+                                {% set realSeats = seats.value - reservedSeats %}
+                                <input  type="radio" name="day" id="{{day.entity.name.value | raw}}" value="{{ realSeats }} " class="popupInput">
+                                <label for="{{day.entity.name.value | raw}}" >{{day.entity.name.value | raw}} - Available seats : {{ realSeats }}</label><br>
                             {% endfor %}
                             {% for genre in movie.field_movie_type %}
                                 <input class="movieGenre" type="hidden" name="genre" value="{{genre.entity.name.value}}">

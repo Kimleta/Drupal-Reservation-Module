@@ -4,6 +4,7 @@ namespace Drupal\reservation\Controller;
 
 use Drupal;
 use Drupal\comment\Entity\Comment;
+use Drupal\reservation\Services\GetReservations;
 use Drupal\reservation\Services\XMLroute;
 use Symfony\Component\HttpFoundation\Request;
 use \Drupal\node\Entity\Node;
@@ -13,6 +14,8 @@ class ReservationController
 
     public function content()
     {
+
+        $connection = Drupal::database();
 
         $genres = Drupal::entityTypeManager()
             ->getStorage('taxonomy_term')
@@ -31,16 +34,29 @@ class ReservationController
 
         $reservation = Drupal::request()->query->get('reservation');
 
-        if (isset($reservation)) {
+        $getMovieReservation = Drupal::request()->query->get('reserve');
+
+        if (isset($getMovieReservation)) {
             $connection = Drupal::database();
 
-            $title = Drupal::request()->get('title');
-            $day = Drupal::request()->get('day');
-            $genre = Drupal::request()->get('genre');
-            $name = Drupal::request()->get('name');
+            $getReservations = new GetReservations();
+
+            $reservations = $getReservations->getReservations();
+        }
+
+        if (isset($reservation)) {
+
+            $connection = Drupal::database();
+
+            $dataArray = Drupal::request()->get('dataArray');
+
+            $title = $dataArray[0];
+            $day = $dataArray[1];
+            $genre = $dataArray[2];
+            $name = $dataArray[3];
             $date = date('Y-m-d H:i:s');
 
-            $result = $connection->insert('reservations')
+            $result = $connection->insert('Reservations')
                 ->fields([
                     'day_of_reservation' => $day,
                     'time_of_reservation' => $date,
@@ -48,7 +64,6 @@ class ReservationController
                     'reserved_movie_genre' => $genre,
                     'customer_name' => $name,
                 ])->execute();
-
         }
 
         return array(
@@ -56,6 +71,7 @@ class ReservationController
             '#movies' => $movies,
             '#title' => 'Welcome to movie reservation page',
             '#genres' => $genres,
+            '#reservations' => $reservations,
         );
     }
 
@@ -87,7 +103,8 @@ class ReservationController
                 ->getStorage('node')
                 ->loadByProperties([
                     'type' => 'book',
-                    'field_isbn' => $book["@attributes"]["ISBN"]]);
+                    'field_isbn' => $book["@attributes"]["ISBN"],
+                ]);
 
             if (!$data) {
                 $nodeBook = Node::create([
@@ -126,9 +143,7 @@ class ReservationController
                     $commentor = Comment::create($values);
                     $commentor->save();
                 }
-
             }
-
         }
 
         return array(

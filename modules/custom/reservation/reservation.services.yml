@@ -1,3 +1,5 @@
 services:
   reservation.xmlroute:
     class: Drupal\reservation\Services\XMLroute
+  reservation.getreservations:
+    class: Drupal\reservation\Services\GetReservations
